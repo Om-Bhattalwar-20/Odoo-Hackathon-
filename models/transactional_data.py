@@ -95,3 +95,13 @@ class EcosphereDepartmentScore(models.Model):
     soc_score = fields.Float(string='Social Score') 
     gov_score = fields.Float(string='Governance Score') 
     total_score = fields.Float(string='Total Score')
+
+    def action_calculate_emission(self):
+        # This checks if the setting is enabled
+        auto_calc = self.env['ir.config_parameter'].sudo().get_param('ecosphere.auto_emission')
+        if auto_calc:
+            for record in self:
+                # Logic: If an emission factor is linked, calculate the value
+                if record.emission_factor_id:
+                    # Simplified calculation logic for hackathon
+                    record.value = record.emission_factor_id.carbon_value * 1.0
