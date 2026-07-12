@@ -48,6 +48,76 @@ class EcosphereEmployeeParticipation(models.Model):
             
     class EcosphereChallenge(models.Model):
      _name = 'ecosphere.challenge'
+    _description = 'ESG Challenge'
+
+    name = fields.Char(string='Challenge Name', required=True)
+    category_id = fields.Many2one('ecosphere.category', string='Category')
+    xp_reward = fields.Integer(string='XP Reward', required=True)
+    difficulty = fields.Selection([
+        ('easy', 'Easy'), 
+        ('medium', 'Medium'), 
+        ('hard', 'Hard')
+    ], string='Difficulty')
+    deadline = fields.Date(string='Deadline')
+    state = fields.Selection([
+        ('draft', 'Draft'), 
+        ('active', 'Active'), 
+        ('closed', 'Closed')
+    ], string='Status', default='draft')
+
+class EcosphereChallengeParticipation(models.Model):
+    _name = 'ecosphere.challenge.participation'
+    _description = 'Challenge Participation'
+
+    challenge_id = fields.Many2one('ecosphere.challenge', string='Challenge', required=True) 
+    employee_id = fields.Many2one('res.users', string='Employee', required=True) 
+    progress = fields.Float(string='Progress (%)') 
+    proof = fields.Binary(string='Proof Document') 
+    approval_status = fields.Selection([('pending', 'Pending'), ('approved', 'Approved')], string='Approval') 
+    xp_awarded = fields.Integer(string='XP Awarded') 
+
+class EcosphereComplianceIssue(models.Model):
+    _name = 'ecosphere.compliance.issue'
+    _description = 'Compliance Issue'
+
+    name = fields.Char(string='Description', required=True) 
+    severity = fields.Selection([('low', 'Low'), ('medium', 'Medium'), ('high', 'High')], string='Severity') 
+    owner_id = fields.Many2one('res.users', string='Owner', required=True) 
+    due_date = fields.Date(string='Due Date', required=True) 
+    state = fields.Selection([('open', 'Open'), ('closed', 'Closed')], string='Status', default='open') 
+
+class EcosphereDepartmentScore(models.Model):
+    _name = 'ecosphere.department.score'
+    _description = 'Department Score'
+
+    department_id = fields.Many2one('ecosphere.department', string='Department', required=True) 
+    env_score = fields.Float(string='Environmental Score') 
+    soc_score = fields.Float(string='Social Score') 
+    gov_score = fields.Float(string='Governance Score') 
+    total_score = fields.Float(string='Total Score')
+
+    def action_calculate_emission(self):
+        # This checks if the setting is enabled
+        auto_calc = self.env['ir.config_parameter'].sudo().get_param('ecosphere.auto_emission')
+        if auto_calc:
+            for record in self:
+                # Logic: If an emission factor is linked, calculate the value
+                if record.emission_factor_id:
+                    # Simplified calculation logic for hackathon
+                    record.value = record.emission_factor_id.carbon_value * 1.0    ], string='Approval Status', default='draft')
+
+    @api.constrains('state', 'proof')
+    def _check_evidence_requirement(self):
+        # Fetch the setting value from system parameters
+        evidence_required = self.env['ir.config_parameter'].sudo().get_param('ecosphere.evidence_requirement')
+        
+        for record in self:
+            # Only raise the error if the setting is True AND proof is missing
+            if evidence_required and record.state == 'approved' and not record.proof:
+                raise UserError("Evidence Requirement is enabled: You must attach proof before approving.")
+            
+    class EcosphereChallenge(models.Model):
+     _name = 'ecosphere.challenge'
     _description = 'Sustainability Challenge'
 
     name = fields.Char(string='Title', required=True) 
