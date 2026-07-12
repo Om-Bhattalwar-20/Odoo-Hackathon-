@@ -1,3 +1,13 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_ecosphere_department,ecosphere.department.access,model_ecosphere_department,base.group_user,1,1,1,1
 access_ecosphere_category,ecosphere.category.access,model_ecosphere_category,base.group_user,1,1,1,1
+access_ecosphere_emission_factor,ecosphere.emission.factor.access,model_ecosphere_emission_factor,base.group_user,1,1,1,1
+access_ecosphere_badge,ecosphere.badge.access,model_ecosphere_badge,base.group_user,1,1,1,1
+access_ecosphere_reward,ecosphere.reward.access,model_ecosphere_reward,base.group_user,1,1,1,1
+access_ecosphere_carbon,ecosphere.carbon.transaction.access,model_ecosphere_carbon_transaction,base.group_user,1,1,1,1
+access_ecosphere_csr,ecosphere.csr.activity.access,model_ecosphere_csr_activity,base.group_user,1,1,1,1
+access_ecosphere_participation,ecosphere.employee.participation.access,model_ecosphere_employee_participation,base.group_user,1,1,1,1
+access_ecosphere_challenge,ecosphere.challenge.access,model_ecosphere_challenge,base.group_user,1,1,1,1
+access_ecosphere_challenge_part,ecosphere.challenge.participation.access,model_ecosphere_challenge_participation,base.group_user,1,1,1,1
+access_ecosphere_compliance,ecosphere.compliance.issue.access,model_ecosphere_compliance_issue,base.group_user,1,1,1,1
+access_ecosphere_dept_score,ecosphere.department.score.access,model_ecosphere_department_score,base.group_user,1,1,1,1
