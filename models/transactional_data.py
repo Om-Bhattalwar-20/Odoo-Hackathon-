@@ -38,12 +38,14 @@ class EcosphereEmployeeParticipation(models.Model):
 
     @api.constrains('state', 'proof')
     def _check_evidence_requirement(self):
+        # Fetch the setting value from system parameters
+        evidence_required = self.env['ir.config_parameter'].sudo().get_param('ecosphere.evidence_requirement')
+        
         for record in self:
-            # Check if the state is being moved to 'approved' but the 'proof' binary field is empty
-            if record.state == 'approved' and not record.proof:
-                raise UserError("Evidence Requirement: You cannot mark CSR participation as Approved without an attached proof document.")
-
-
+            # Only raise the error if the setting is True AND proof is missing
+            if evidence_required and record.state == 'approved' and not record.proof:
+                raise UserError("Evidence Requirement is enabled: You must attach proof before approving.")
+            
     class EcosphereChallenge(models.Model):
      _name = 'ecosphere.challenge'
     _description = 'Sustainability Challenge'
