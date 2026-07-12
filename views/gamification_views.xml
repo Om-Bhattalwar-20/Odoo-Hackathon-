@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Reward Views & Action -->
+    <record id="view_ecosphere_reward_tree" model="ir.ui.view">
+        <field name="name">ecosphere.reward.tree</field>
+        <field name="model">ecosphere.reward</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="points_required"/>
+                <field name="stock_status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ecosphere_reward_form" model="ir.ui.view">
+        <field name="name">ecosphere.reward.form</field>
+        <field name="model">ecosphere.reward</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- This button will trigger our Python redemption rule! -->
+                    <button name="action_redeem_reward" type="object" string="Redeem Reward" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="points_required"/>
+                        </group>
+                        <group>
+                            <field name="stock_status"/>
+                        </group>
+                    </group>
+                    <field name="description" placeholder="Describe the reward..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ecosphere_reward" model="ir.actions.act_window">
+        <field name="name">Rewards Catalog</field>
+        <field name="res_model">ecosphere.reward</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Badge Views & Action -->
+    <record id="view_ecosphere_badge_tree" model="ir.ui.view">
+        <field name="name">ecosphere.badge.tree</field>
+        <field name="model">ecosphere.badge</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="unlock_rule"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_ecosphere_badge" model="ir.actions.act_window">
+        <field name="name">Badges</field>
+        <field name="res_model">ecosphere.badge</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Challenge Views & Action -->
+    <record id="view_ecosphere_challenge_tree" model="ir.ui.view">
+        <field name="name">ecosphere.challenge.tree</field>
+        <field name="model">ecosphere.challenge</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="difficulty"/>
+                <field name="xp_reward"/>
+                <field name="deadline"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_ecosphere_challenge" model="ir.actions.act_window">
+        <field name="name">Challenges</field>
+        <field name="res_model">ecosphere.challenge</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Gamification Top-Level Menu -->
+    <menuitem id="menu_ecosphere_gamification" name="Gamification" parent="menu_ecosphere_root" sequence="50"/>
+    <menuitem id="menu_ecosphere_challenges" name="Challenges" parent="menu_ecosphere_gamification" action="action_ecosphere_challenge" sequence="10"/>
+    <menuitem id="menu_ecosphere_rewards" name="Rewards Catalog" parent="menu_ecosphere_gamification" action="action_ecosphere_reward" sequence="20"/>
+    <menuitem id="menu_ecosphere_badges" name="Badges" parent="menu_ecosphere_gamification" action="action_ecosphere_badge" sequence="30"/>
+</odoo>
