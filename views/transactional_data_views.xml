@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_carbon_tree" model="ir.ui.view">
+        <field name="name">ecosphere.carbon.tree</field>
+        <field name="model">ecosphere.carbon.transaction</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="department_id"/>
+                <field name="emission_factor_id"/>
+                <field name="value"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_ecosphere_carbon" model="ir.actions.act_window">
+        <field name="name">Carbon Transactions</field>
+        <field name="res_model">ecosphere.carbon.transaction</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_csr_tree" model="ir.ui.view">
+        <field name="name">ecosphere.csr.tree</field>
+        <field name="model">ecosphere.csr.activity</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="points_reward"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_ecosphere_csr" model="ir.actions.act_window">
+        <field name="name">CSR Activities</field>
+        <field name="res_model">ecosphere.csr.activity</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_compliance_tree" model="ir.ui.view">
+        <field name="name">ecosphere.compliance.tree</field>
+        <field name="model">ecosphere.compliance.issue</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="severity"/>
+                <field name="owner_id"/>
+                <field name="due_date"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_ecosphere_compliance" model="ir.actions.act_window">
+        <field name="name">Compliance Issues</field>
+        <field name="res_model">ecosphere.compliance.issue</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_ecosphere_env" name="Environmental" parent="menu_ecosphere_root" sequence="20"/>
+    <menuitem id="menu_ecosphere_carbon" name="Carbon Transactions" parent="menu_ecosphere_env" action="action_ecosphere_carbon" sequence="10"/>
+
+    <menuitem id="menu_ecosphere_soc" name="Social" parent="menu_ecosphere_root" sequence="30"/>
+    <menuitem id="menu_ecosphere_csr" name="CSR Activities" parent="menu_ecosphere_soc" action="action_ecosphere_csr" sequence="10"/>
+
+    <menuitem id="menu_ecosphere_gov" name="Governance" parent="menu_ecosphere_root" sequence="40"/>
+    <menuitem id="menu_ecosphere_compliance" name="Compliance Issues" parent="menu_ecosphere_gov" action="action_ecosphere_compliance" sequence="10"/>
+</odoo>

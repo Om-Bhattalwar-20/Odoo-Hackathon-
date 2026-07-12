@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="ecosphere_esg.list">
+      <field name="name">ecosphere_esg list</field>
+      <field name="model">ecosphere_esg.ecosphere_esg</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="ecosphere_esg.action_window">
+      <field name="name">ecosphere_esg window</field>
+      <field name="res_model">ecosphere_esg.ecosphere_esg</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="ecosphere_esg.action_server">
+      <field name="name">ecosphere_esg server</field>
+      <field name="model_id" ref="model_ecosphere_esg_ecosphere_esg"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="ecosphere_esg" id="ecosphere_esg.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="ecosphere_esg.menu_1" parent="ecosphere_esg.menu_root"/>
+    <menuitem name="Menu 2" id="ecosphere_esg.menu_2" parent="ecosphere_esg.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="ecosphere_esg.menu_1_list" parent="ecosphere_esg.menu_1"
+              action="ecosphere_esg.action_window"/>
+    <menuitem name="Server to list" id="ecosphere_esg" parent="ecosphere_esg.menu_2"
+              action="ecosphere_esg.action_server"/>
+-->
+  </data>
+</odoo>
