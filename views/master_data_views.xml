@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_department_form" model="ir.ui.view">
+        <field name="name">ecosphere.department.form</field>
+        <field name="model">ecosphere.department</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="parent_id"/>
+                        </group>
+                        <group>
+                            <field name="head_id"/>
+                            <field name="employee_count"/>
+                            <field name="status"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_department_tree" model="ir.ui.view">
+        <field name="name">ecosphere.department.tree</field>
+        <field name="model">ecosphere.department</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="head_id"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_category_form" model="ir.ui.view">
+        <field name="name">ecosphere.category.form</field>
+        <field name="model">ecosphere.category</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="type"/>
+                        <field name="status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_category_tree" model="ir.ui.view">
+        <field name="name">ecosphere.category.tree</field>
+        <field name="model">ecosphere.category</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="type"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_ecosphere_department" model="ir.actions.act_window">
+        <field name="name">Departments</field>
+        <field name="res_model">ecosphere.department</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_ecosphere_category" model="ir.actions.act_window">
+        <field name="name">Categories</field>
+        <field name="res_model">ecosphere.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_ecosphere_root" name="EcoSphere ESG" sequence="10"/>
+    <menuitem id="menu_ecosphere_config" name="Configuration" parent="menu_ecosphere_root" sequence="100"/>
+    <menuitem id="menu_ecosphere_department" name="Departments" parent="menu_ecosphere_config" action="action_ecosphere_department" sequence="10"/>
+    <menuitem id="menu_ecosphere_category" name="Categories" parent="menu_ecosphere_config" action="action_ecosphere_category" sequence="20"/>
+</odoo>
