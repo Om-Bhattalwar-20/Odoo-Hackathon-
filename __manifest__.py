@@ -30,6 +30,8 @@ Long description of module's purpose
         # 'security/ir.model.access.csv',
         'security/ir.model.access.csv',
         'views/master_data_views.xml',
+        'views/transactional_data_views.xml',
+        'views/gamification_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
